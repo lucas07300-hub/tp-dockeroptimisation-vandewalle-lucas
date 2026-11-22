@@ -6,11 +6,14 @@ const path = require('path');
 const app = express();
 
 
+// Utilisation d'un logger avec la librairie morgan pour enregistrer les requêtes HTTP
+const morgan = require('morgan');
+app.use(morgan(process.env.APP_ENV === 'production' ? 'combined' : 'dev'));
 // Middleware verbeux et un peu inutile
-app.use((req, res, next) => {
-console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
-next();
-});
+//app.use((req, res, next) => {
+//    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+//    next();
+//});
 
 
 app.get('/', (req, res) => {
