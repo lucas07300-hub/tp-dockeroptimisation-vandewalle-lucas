@@ -22,3 +22,5 @@ Limiter l'exposition des ports à un seul, ici 3000.
         - Fix réalisé car la dépendance n'avait pas été installé. J'ai fait un npm install morgan pour que les dépendances s'intallent sur le package-json.json et package.json.
     - Création du fichier .txt : Création d'un fichier texte avec quelques lignes pour tester si le server renvoi correctement les lignes.
         - /big renvoyé en 7.126 ms : "GET /big 200 7.126 ms - 2548"
+
+    - Cohérence : Harmonisation des noms des variables d'environnement en NODE_ENV dans dockerfile et server.js pour que cela corresponde aussi avec la package.json.
