@@ -65,3 +65,11 @@ Poid de l'image : 288 MB
 * **Réseau :** exposition du port `3000` et alignement des variables d'environnement (`NODE_ENV` / `APP_DEBUG`).
 * **Sécurité HTTP :** désactivation de l'en-tête `x-powered-by`.
 * **Performance & logs :** lecture asynchrone du fichier sur la route `/big` (`GET /big 200` observé en **7.126 ms**) avec journalisation via `morgan`.
+
+## Intégration Continue (CI) & Docker Compose
+
+Afin d'automatiser la validation de l'image Docker à chaque évolution du dépôt, j'ai créé un fichier `docker-compose.yml`  et un wf GitHub Actions (`.github/workflows/ci.yml`).
+* **Gestion (`docker-compose.yml`) :** permet de construire l'image et de démarrer le conteneur sur le port `3000` en mode `production` en une seule commande.
+* **Pipeline CI (`ci.yml`) :** à chaque `push` ou `pull_request`, le wf build l'image, vérifie que l'application démarre et fonctionne sur `/` et affiche la taille de l'image  pour suivre les évols, puis nettoie les ressources avec un docker compose down.
+
+A noter : Il aurait été intéréssant de mettre cela en place dès le début du projet afin d'avoir eu toutes les informations sur l'évolutions de la taille de l'image.

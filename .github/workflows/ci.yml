@@ -1,0 +1,22 @@
+name: Mini CI
+
+on: [push, pull_request]
+
+jobs:
+  docker-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build & start
+        run: docker compose up -d --build
+
+      - name: Test endpoint & image size
+        run: |
+          sleep 2
+          curl -fsS http://localhost:3000/ > /dev/null
+          docker images --format "{{.Repository}}:{{.Tag}} -> {{.Size}}" | grep -v "<none>"
+
+      - name: Cleanup
+        if: always()
+        run: docker compose down -v
