@@ -18,14 +18,16 @@ res.send('Hello world — serveur volontairement non optimisé mais fonctionnel'
 });
 
 
-app.get('/big', (req, res) => {
-const filePath = path.join(__dirname, 'maybe-big-file.txt');
-if (fs.existsSync(filePath)) {
-const data = fs.readFileSync(filePath, 'utf8');
-res.send(data.replace(/\n/g, '<br/>'));
-} else {
-res.send('Fichier introuvable');
-}
+//Passaege en asynchrone pour reduire le temp de traitement du fichier
+app.get('/big', async (req, res) => {
+    const filePath = path.join(__dirname, 'maybe-big-file.txt');
+    try {
+        const data = await fs.promises.readFile(filePath, 'utf8');
+        res.send(data.replaceAll('\n', '<br/>'));
+    } catch (error) {
+        console.error('Erreur lors de la lecture du fiichier :', error);
+        res.status(500).send('Erreur lors de la lecture du fiichier.');
+    }
 });
 
 
