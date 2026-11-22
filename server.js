@@ -1,9 +1,10 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 
 const app = express();
+app.disable('x-powered-by');
 
 
 // Utilisation d'un logger avec la librairie morgan pour enregistrer les requêtes HTTP

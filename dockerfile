@@ -1,6 +1,6 @@
 FROM node:alpine
 WORKDIR /app
-COPY . /app
+COPY package.json maybe-big-file.txt server.js ./
 RUN npm install
 EXPOSE 3000
 ENV APP_DEBUG=false
