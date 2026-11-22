@@ -24,3 +24,10 @@ Limiter l'exposition des ports à un seul, ici 3000.
         - /big renvoyé en 7.126 ms : "GET /big 200 7.126 ms - 2548"
 
     - Cohérence : Harmonisation des noms des variables d'environnement en NODE_ENV dans dockerfile et server.js pour que cela corresponde aussi avec la package.json.
+
+* Package.json : 
+
+    - Mongodb : Suppression de mongodb dans le package car nous n'en avons pas besoin dans cette application. 
+
+Build de l'image : 12.1s
+Poid de l'image : 288 MB 
